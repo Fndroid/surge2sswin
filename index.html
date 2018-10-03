@@ -271,16 +271,16 @@
             </div>
 
 
-            <div class="box__uploading">Uploading&hellip;</div>
-            <div class="box__success">Done! <a href="./index.html" class="box__restart" role="button">Upload more?</a></div>
-            <div class="box__error">Error! <span></span>. <a href="./index.html" class="box__restart" role="button">Try
-                    again!</a></div>
+            <div class="box__uploading">正在上传&hellip;</div>
+            <div class="box__success">完成！重新上传请刷新此页面！</div>
+            <div class="box__error">错误！ <span></span>. <a href="./index.html" class="box__restart" role="button">重试！</a></div>
         </form>
 
 
 
         <footer>
-            <p><strong>请上传正确格式的update.json文件，格式参见<a href='./update.json'>demo</a></strong></p>
+			<p><strong>请上传正确格式的update.json文件，格式参见<a href='./update.json'>demo</a></strong></p>
+			<p><strong>浏览器可能会拦截自动下载，请手动允许！</strong></p>
         </code>
         </footer>
 
@@ -573,8 +573,8 @@
                             form.classList.remove('is-uploading');
                             if (ajax.status >= 200 && ajax.status < 400) {
                                 var data = JSON.parse(ajax.responseText);
-                                // form.classList.add(data.success == true ? 'is-success' : 'is-error');
-                                // if (!data.success) errorMsg.textContent = data.error;
+                                form.classList.add(data ? 'is-success' : 'is-error');
+                                if (!data) errorMsg.textContent = data.error;
                                 var blob = new Blob([ajax.responseText], { type: "application/json" })
                                 var url = URL.createObjectURL(blob)
                                 var link = document.createElement('a')
@@ -586,12 +586,12 @@
 
                                 document.body.removeChild(link);
                             }
-                            else alert('Error. Please, contact the webmaster!');
+                            else alert('错误，请联系开发者！');
                         };
 
                         ajax.onerror = function () {
                             form.classList.remove('is-uploading');
-                            alert('Error. Please, try again!');
+                            alert('上传失败，请重试！');
                         };
 
                         ajax.send(ajaxData);
