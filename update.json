@@ -1,0 +1,11 @@
+{
+    "providers": [
+      "https://a.com/token",
+      "https://b.com/token"
+    ],
+    "filter": [
+      "香港",
+      "台湾"
+    ]
+  }
+  
